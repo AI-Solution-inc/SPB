@@ -1,12 +1,11 @@
-import numpy as np
 import cv2
-
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
-from PIL import Image
+import numpy as np
 import torch
 
-from model import get_model_deeplabv3_resnet50
+from ml_utils.model import get_model_deeplabv3_resnet50
+from PIL import Image
 from skimage.transform import resize
 
 
@@ -20,7 +19,7 @@ def preprocess_img(img: np.ndarray):
     return img_t
 
 
-def initialize_model(ckpt_path="checkpoints/exp_2/best.pth"):
+def initialize_model(ckpt_path="ml_utils/checkpoints/exp_2/best.pth"):
     model = get_model_deeplabv3_resnet50()
 
     # загрузим чекпойнт в модель для проверки

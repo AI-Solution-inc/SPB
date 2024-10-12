@@ -1,5 +1,5 @@
 import csv
-
+import logging
 
 class Logger():
     def __init__(self, filename) -> None:
@@ -29,3 +29,21 @@ class Logger():
                    self.train_loss, self.train_miou, self.train_pix_acc,
                    self.val_loss, self.val_miou, self.val_pix_acc]
             writer.writerow(row)
+
+
+
+def create_base_logger(training_dir):
+    # создание базового логгера  дообучения
+    base_logger = logging.getLogger("Additional Training")
+    base_logger.setLevel(logging.DEBUG)
+    
+    # очистка файла от предыдущих логов
+    filename = f"{training_dir}/log.log"
+    with open(filename, 'w'):
+        pass
+
+    formatter = logging.Formatter('%(asctime)s %(levelname)s:%(filename)s: %(message)s')
+    file_handler = logging.FileHandler(filename=filename)
+    file_handler.setFormatter(formatter)
+    base_logger.addHandler(file_handler)
+    return base_logger
