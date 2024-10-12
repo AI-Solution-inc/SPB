@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const reader = new FileReader();
             reader.onload = function (e) {
                 wrapper.style.backgroundImage = `url(${e.target.result})`;
+                wrapper.style.backgroundPosition = 'center center';
+                wrapper.style.backgroundRepeat = 'no-repeat';
+                wrapper.style.backgroundSize = 'contain';
+                
                 label.classList.add("hidden");
             };
             reader.readAsDataURL(input.files[0]);

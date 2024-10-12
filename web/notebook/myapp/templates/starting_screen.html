@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Проверка дефектов</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <!-- <link rel="stylesheet" href="./../static/styles.css" /> -->
     <script src="{% static 'script.js' %}"></script>
+    <!-- <script src="./../static/script.js"></script> -->
   </head>
   <body>
     <header class="header"></header>
     <div class="container">
       <div class="wrap">
         <div>
-          <h2 class="title">Отправка</h2>
+          <h2 class="title">Загрузка</h2>
           <form
             action="/"
             method="post"
@@ -22,7 +24,7 @@
           >
             {% csrf_token %}
             <div class="form-input-wrapper" id="form-input-wrapper">
-              <label for="photo" class="form-label">Загрузите фото</label>
+              <label for="photo" class="form-label">+</label>
               <input
                 class="form-input"
                 type="file"
@@ -32,6 +34,7 @@
                 onchange="previewImage(event)"
               />
             </div>
+            <div id="image-preview"></div>
             <button class="form-btn" type="submit">
               Отправить на проверку
             </button>
@@ -50,18 +53,18 @@
               alt="Processed Image"
             />
             {% endif %}
-
-          <div class="result-content">
-            <h3 class="result-title">Дефекты:</h3>
-            <ul class="result-list">
-              <!-- <li>прилегающие дефекты</li>
-              <li>дефекты целостности</li>
-              <li>дефекты геометрии</li>
-              <li>дефекты постобработки</li>
-              <li>дефекты невыполнения</li> -->
-            </ul>
-          </div> 
         </div>
+
+        <div class="result-content">
+          <h3 class="result-title">Список дефектов:</h3>
+          <ul class="result-list">
+            <!-- <li>прилегающие дефекты</li>
+            <li>дефекты целостности</li>
+            <li>дефекты геометрии</li>
+            <li>дефекты постобработки</li>
+            <li>дефекты невыполнения</li> -->
+          </ul>
+        </div> 
       </div>
     </div>
   </body>
