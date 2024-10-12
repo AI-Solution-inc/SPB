@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
-from ml_utils.model import get_model_deeplabv3_resnet50
+from processing.ml_utils.model import get_model_deeplabv3_resnet50
 from PIL import Image
 from skimage.transform import resize
 
@@ -21,11 +21,11 @@ def preprocess_img(img: np.ndarray):
     return img_t
 
 
-def initialize_model(ckpt_path="ml_utils/checkpoints/best.pth"):
+def initialize_model(ckpt_path="processing/ml_utils/checkpoints/best.pth"):
     model = get_model_deeplabv3_resnet50()
 
     # загрузим чекпойнт в модель для проверки
-    checkpoint = torch.load(ckpt_path)
+    checkpoint = torch.load(ckpt_path,map_location=torch.device(device))
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
 
@@ -45,12 +45,12 @@ def write_outputs2mask(outputs):
         mask_img[masked_output.mask] = i
 
     pil_mask = Image.fromarray(mask_img).convert('RGB')
-    pil_mask.save("../media/mask.png", "PNG")
+    pil_mask.save("../notebook/media/mask.png", "PNG")
 
 
 def run_on_image(image: np.ndarray):
     image_orig = Image.fromarray(image).convert('RGB')
-    image_orig.save("../media/original.png", "PNG")
+    image_orig.save("../notebook/media/original.png", "PNG")
     
     img_t = preprocess_img(image)
     with torch.no_grad():
@@ -77,4 +77,4 @@ def run_on_image(image: np.ndarray):
 
     plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
     plt.axis("off")
-    plt.savefig("../media/processed.png", bbox_inches="tight")
+    plt.savefig("../notebook/media/processed.png", bbox_inches="tight")

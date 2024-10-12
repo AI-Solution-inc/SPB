@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
-from processing.preprocessing_data import preprocess_data_json
-import cv2 
+from processing.run import run_on_image
+# import cv2 
 import os
+from PIL import Image
+import numpy as np
 
 def processing() -> list:
     return list()
@@ -15,13 +17,21 @@ def starting_screen(request):
         photo = request.FILES['photo']
         fs = FileSystemStorage()
         filename = fs.save(photo.name, photo)
-        uploaded_file_url = fs.url(filename)
+        # uploaded_file_url = fs.url(filename) # /media/...
+        absolute_file_path = os.path.join(fs.location, filename) #fullpath
+
+        # Открываем изображение с помощью Pillow
+        image = Image.open(absolute_file_path).convert('RGB')
+
+        # Конвертируем изображение в массив NumPy
+        image_array = np.array(image)
+
+        print(image_array.shape)  # Выводим размерность массива
 
         # Получение абсолютного пути к файлу
-        absolute_file_path = os.path.join(fs.location, filename)
 
-        data, img  = preprocess_data_json(absolute_file_path)
-
+        data, img  = run_on_image(image_array)
+        data, img  = ['str', 'str']
         context = {
             'uploaded_file_url': img,
             'data': data,
