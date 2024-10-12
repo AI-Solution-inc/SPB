@@ -1,5 +1,5 @@
 """
-ASGI config for atomic_web project.
+ASGI config for Notebook project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
