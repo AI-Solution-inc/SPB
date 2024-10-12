@@ -42,4 +42,32 @@ document.addEventListener('DOMContentLoaded', () => {
         frame.style.left = `calc((${x} * 1px) + (${widthImg / 2} * 1px))`;
         frame.style.top = `calc((${y} * 1px) + (${heigthImg / 2} * 1px))`;
     })
+
+    // modal
+    const modal = document.querySelector('.modal');
+    const modalOverlay = document.querySelector('.modal-overlay');
+    const body = document.body;
+    const btnModalOpen = document.querySelector('.send-btn');
+    const btnClose = document.querySelector('.modal-close');
+    const btnCloseSecond = document.querySelector('.modal-btn');
+
+    btnModalOpen.addEventListener('click', () => {
+        body.classList.add('modal-opened');
+        modal.classList.remove('hidden');
+        modalOverlay.style.display="block";
+    })
+
+    const closeBtnFunc = () => {
+        body.classList.remove('modal-opened');
+        modal.classList.add('hidden');
+        modalOverlay.style.display="none";
+    }
+
+    btnClose.addEventListener('click', () => {
+        closeBtnFunc();
+    })
+
+    btnCloseSecond.addEventListener('click', () => {
+        closeBtnFunc();
+    })
 })
