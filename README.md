@@ -3,7 +3,7 @@
 ## Инструкция по разворачиванию:
 1. Склонируйте репозиторий
 ```python
+python -m pip install -r requir.txt
 cd notebook
-python -m pip install -r requirements.txt
 python manage.py runserver
 ```
