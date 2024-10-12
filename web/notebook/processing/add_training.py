@@ -5,10 +5,10 @@ import torch.nn as nn
 import os
 import shutil
 
-from ml_utils.dataloader import DefectDataset, getDefectDatasetLoaders
-from ml_utils.engine import Engine
-from ml_utils.logger import Logger, create_base_logger
-from ml_utils.model import get_model_deeplabv3_resnet50
+from processing.ml_utils.dataloader import DefectDataset, getDefectDatasetLoaders
+from processing.ml_utils.engine import Engine
+from processing.ml_utils.logger import Logger, create_base_logger
+from processing.ml_utils.model import get_model_deeplabv3_resnet50
 from torch.optim import lr_scheduler
 
 
@@ -49,7 +49,7 @@ def launch_training(training_dir):
     engine = get_engine()
 
     prev_best_value = 0
-    engine.load_from_ckpt(f"ml_utils/checkpoints/best.pth")
+    engine.load_from_ckpt("processing/ml_utils/checkpoints/best.pth")
     engine.epochs = engine.trained_epochs + 20 # дополнительные эпохи для дообучения
     for e in range(engine.trained_epochs, engine.epochs):
         base_logger.debug(f"Epoch {e+1}: TRAIN")

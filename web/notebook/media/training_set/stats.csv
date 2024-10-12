@@ -1,0 +1,1 @@
+num_epoch,train_loss,train_miou,train_pix_acc,val_loss,val_miou,val_pix_acc
