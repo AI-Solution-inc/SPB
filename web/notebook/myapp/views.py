@@ -11,10 +11,9 @@ def starting_screen(request):
 
     data = []
     mask = ''
-
     if request.method == 'POST' and request.FILES.get('photo'):
 
-        # print (request.POST.get('action'))
+        print (request.POST.get('action'))
         photo = request.FILES['photo']
         serial_num = '123-123'
         fs = FileSystemStorage()
@@ -38,11 +37,10 @@ def starting_screen(request):
             'uploaded_file_url': process,
             'data': serial_num,
         }
-        return render(request, 'starting_screen.html', context)
+        return render(request, 'starting_screen.html', context)    
     
     context = {
         'uploaded_file_url': '',
         'data': data,
     }
-
     return render(request, 'starting_screen.html', context)# Create your views here.
