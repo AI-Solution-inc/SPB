@@ -46,7 +46,7 @@ def launch_training(training_dir):
     engine = get_engine()
 
     prev_best_value = 0
-    engine.load_from_ckpt(f"ml_utils/checkpoints/exp_2/best.pth")
+    engine.load_from_ckpt(f"ml_utils/checkpoints/best.pth")
     engine.epochs = engine.trained_epochs + 20 # дополнительные эпохи для дообучения
     for e in range(engine.trained_epochs, engine.epochs):
         base_logger.debug(f"Epoch {e+1}: TRAIN")
