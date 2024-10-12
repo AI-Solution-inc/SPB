@@ -15,13 +15,6 @@ python main.py
 ## Инструкция по разворачиванию:
 1. Склонируйте репозиторий
 ```python
-curl -sSL https://install.python-poetry.org | python3 -
-poetry install 
-cd atomic_web
-poetry run python manage.py runserver
-```
-альтернатива 
-```python
 cd atomic_web
 python -m pip install -r requirements.txt
 python manage.py runserver
