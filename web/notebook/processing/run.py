@@ -3,11 +3,13 @@ import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
+from matplotlib import use
 
 from processing.ml_utils.model import get_model_deeplabv3_resnet50
 from PIL import Image
 from skimage.transform import resize
 
+use('Agg') 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 

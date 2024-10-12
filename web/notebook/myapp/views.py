@@ -5,6 +5,7 @@ from processing.run import run_on_image
 import os
 from PIL import Image
 import numpy as np
+from notebook.settings import MEDIA_ROOT
 
 def processing() -> list:
     return list()
@@ -16,7 +17,7 @@ def starting_screen(request):
     if request.method == 'POST' and request.FILES.get('photo'):
         photo = request.FILES['photo']
         fs = FileSystemStorage()
-        filename = fs.save(photo.name, photo)
+        filename = fs.save(photo.name, photo) # имя файла
         # uploaded_file_url = fs.url(filename) # /media/...
         absolute_file_path = os.path.join(fs.location, filename) #fullpath
 
@@ -26,12 +27,12 @@ def starting_screen(request):
         # Конвертируем изображение в массив NumPy
         image_array = np.array(image)
 
-        print(image_array.shape)  # Выводим размерность массива
-
         # Получение абсолютного пути к файлу
 
-        data, img  = run_on_image(image_array)
-        data, img  = ['str', 'str']
+        run_on_image(image_array)
+        img = os.path.join('media', 'processed.png')
+        print(img)
+
         context = {
             'uploaded_file_url': img,
             'data': data,
