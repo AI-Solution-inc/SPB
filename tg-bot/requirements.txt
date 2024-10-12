@@ -1,0 +1,7 @@
+numpy
+Pillow
+matplotlib
+ultralytics
+asyncio
+aiogram==3.7.0
+python-dotenv
