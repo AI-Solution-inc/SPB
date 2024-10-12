@@ -2,6 +2,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+import os
+import shutil
+
 from ml_utils.dataloader import DefectDataset, getDefectDatasetLoaders
 from ml_utils.engine import Engine
 from ml_utils.logger import Logger, create_base_logger
@@ -9,13 +12,13 @@ from ml_utils.model import get_model_deeplabv3_resnet50
 from torch.optim import lr_scheduler
 
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
 def get_engine():
     dataset = DefectDataset("dataset_addon/")
     loaders_dict = getDefectDatasetLoaders(dataset, batch_size=4)
 
     model = get_model_deeplabv3_resnet50()
-
-    device = "cpu"
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
     num_classes = 8
@@ -66,3 +69,13 @@ def launch_training(training_dir):
             engine.save_model(f"{training_dir}/best")
             prev_best_value = val_mIoU
             base_logger.info("Updated Best weights")
+
+
+def update_weights():
+    if os.path.exists("training_results/best.pth"):
+        # дублируется предыдущий файл в best_previous.pth
+        shutil.copy2("ml_utils/checkpoints/best.pth", "ml_utils/checkpoints/best_previous.pth")
+        # копируется новый созданный файл на место старого
+        shutil.copy2("training_results/best.pth", "ml_utils/checkpoints/best.pth")
+        print("Файлы успешно скопированы")
+    else: print("Новых весов в папке нет, перенесение не выполнено")
