@@ -15,7 +15,7 @@ from torch.optim import lr_scheduler
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 def get_engine():
-    dataset = DefectDataset("dataset_addon/")
+    dataset = DefectDataset("../notebook/media/training_set/")
     loaders_dict = getDefectDatasetLoaders(dataset, batch_size=4)
 
     model = get_model_deeplabv3_resnet50()

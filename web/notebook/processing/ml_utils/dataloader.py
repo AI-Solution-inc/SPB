@@ -43,7 +43,7 @@ class DefectDataset(Dataset):
         return len(self.masks)
 
 
-def getDefectDatasetLoaders(init_dataset, batch_size=8, test_size=0.2):
+def getDefectDatasetLoaders(init_dataset, batch_size=1, test_size=0.2):
 
     train_idx_set, test_idx_set = train_test_split(
         np.arange(len(init_dataset)), 

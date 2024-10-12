@@ -34,7 +34,8 @@ class Engine:
         self.epochs = epoch
 
     def load_from_ckpt(self, ckpt_path):
-        checkpoint = torch.load(ckpt_path)
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        checkpoint = torch.load(ckpt_path, map_location=device)
         
         self.trained_epochs = checkpoint['epoch']
         self.train_iters = checkpoint['train_iters']

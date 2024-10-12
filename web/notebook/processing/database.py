@@ -18,4 +18,4 @@ def draw_from_db():
     plt.bar(labels, list(counter_dict.values()), width=0.5, color=['magenta', 'blue', 'green', 'orange', 'red', 'grey', 'brown'])
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
     plt.title("Statistics")
-    plt.savefig(f"../notebook/media/statistics.png", bbox_inches="tight")
+    plt.savefig(f"../notebook/media/stat/statistics.png", bbox_inches="tight")
