@@ -5,20 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Проверка дефектов</title>
-    <!-- <link rel="stylesheet" href="{% static 'styles.css' %}" /> -->
-    <link rel="stylesheet" href="./../static/styles.css" />
-    <!-- <script src="{% static 'script.js' %}"></script> -->
-    <script src="./../static/script.js"></script>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <!-- <link rel="stylesheet" href="./../static/styles.css" /> -->
+    <script src="{% static 'script.js' %}"></script>
+    <!-- <script src="./../static/script.js"></script> -->
   </head>
   <body>
     <header class="header"></header>
     <div class="container">
       <div class="wrap">
-        <!-- тут повесить отправку на обучение -->
-        <button class="send-btn" type="submit" name="action" value="relearn">
-          Отправить на дообучение
-        </button>
-        
         <div>
           <h2 class="title">Загрузка</h2>
           <form
@@ -60,16 +55,17 @@
             {% endif %}
         </div>
 
-        <div class="result-content">
-          <h3 class="result-title">Список дефектов:</h3>
-          <ul class="result-list">
-            <!-- <li>прилегающие дефекты</li>
-            <li>дефекты целостности</li>
-            <li>дефекты геометрии</li>
-            <li>дефекты постобработки</li>
-            <li>дефекты невыполнения</li> -->
-          </ul>
-        </div> 
+        <form
+          action="/"
+          method="post"
+          enctype="multipart/form-data"
+          class="form-wrap"
+        >
+          <!-- тут повесить отправку на обучение -->
+          <button class="send-btn" type="submit" name="action" value="relearn">
+            Отправить на дообучение
+          </button>
+        </form>
       </div>
     </div>
     
