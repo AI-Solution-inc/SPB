@@ -174,17 +174,44 @@ body {
   background: #fff;
 }
 
+.form-input__number {
+  border: 1px solid #808080;
+  background: #fff;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #49454F;
+  height: 44px;
+  width: 300px;
+  padding: 10px 20px;
+}
+
+.right-btns {
+  position: absolute;
+  top: -90px;
+  right: 0;
+  display: flex;
+  gap: 40px;
+}
+
+.add-btn,
 .send-btn {
   padding: 20px 32px;
   background: #FFFFFF;
   font-size: 16px;
   font-weight: 500;
-  color: #DC0821;
   border-radius: 20px;
   border: none;
-  position: absolute;
-  top: -90px;
-  right: 0;
+}
+
+.send-btn {
+  color: #DC0821;
+}
+
+.add-btn {
+  color: #1E1E1E;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .hidden {

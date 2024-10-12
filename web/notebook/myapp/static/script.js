@@ -51,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnClose = document.querySelector('.modal-close');
     const btnCloseSecond = document.querySelector('.modal-btn');
 
-    btnModalOpen.addEventListener('click', () => {
+    btnModalOpen.addEventListener('click', (e) => {
+        e.preventDefault;
         body.classList.add('modal-opened');
         modal.classList.remove('hidden');
         modalOverlay.style.display="block";
