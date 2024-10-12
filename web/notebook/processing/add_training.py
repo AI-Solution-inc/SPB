@@ -10,7 +10,7 @@ from torch.optim import lr_scheduler
 
 
 def get_engine():
-    dataset = DefectDataset("/content/dataset_rsz")
+    dataset = DefectDataset("dataset_addon/")
     loaders_dict = getDefectDatasetLoaders(dataset, batch_size=4)
 
     model = get_model_deeplabv3_resnet50()

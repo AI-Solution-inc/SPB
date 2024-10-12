@@ -9,6 +9,8 @@ from PIL import Image
 from skimage.transform import resize
 
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
 def normalize_tensor(x):
     return (x - torch.min(x)) / (torch.max(x) - torch.min(x))
 
@@ -27,7 +29,6 @@ def initialize_model(ckpt_path="ml_utils/checkpoints/best.pth"):
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
 
-    device = "cpu"
     model.to(device)
     return model
 
@@ -41,19 +42,19 @@ def write_outputs2mask(outputs):
     mask_img = 7 * np.ones(shape=outputs.shape[:2])
     for i in range(7):
         masked_output = np.ma.masked_where(outputs[..., i] > 0.7, outputs[..., i])
-        print(i,np.sum(masked_output.mask))
         mask_img[masked_output.mask] = i
 
     pil_mask = Image.fromarray(mask_img).convert('RGB')
-    pil_mask.save("../../media/mask.png", "PNG")
+    pil_mask.save("../media/mask.png", "PNG")
 
 
 def run_on_image(image: np.ndarray):
     image_orig = Image.fromarray(image).convert('RGB')
-    image_orig.save("../../media/original.png", "PNG")
+    image_orig.save("../media/original.png", "PNG")
     
     img_t = preprocess_img(image)
     with torch.no_grad():
+        img_t = img_t.to(device)
         outputs = MODEL(img_t)
         outputs = outputs["out"]
 
@@ -76,4 +77,4 @@ def run_on_image(image: np.ndarray):
 
     plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
     plt.axis("off")
-    plt.savefig("../../media/processed.png", bbox_inches="tight")
+    plt.savefig("../media/processed.png", bbox_inches="tight")
