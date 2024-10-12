@@ -43,6 +43,8 @@
         <div className="loader"></div>
 
         <div class="result">
+          <!-- тут повесить отправку на обучение -->
+          <button class="send-btn">Отправить на обучение</button>
           <h2 class="title">Результат обработки</h2>
 
           <div class="result-wrap">
@@ -66,6 +68,17 @@
           </ul>
         </div> 
       </div>
+    </div>
+    
+    <div class="modal-overlay"></div>
+    <div class="modal hidden">
+      <button class="modal-close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.66683 23.9509L0.333496 21.6176L9.66683 12.2843L0.333496 2.95092L2.66683 0.617584L12.0002 9.95092L21.3335 0.617584L23.6668 2.95092L14.3335 12.2843L23.6668 21.6176L21.3335 23.9509L12.0002 14.6176L2.66683 23.9509Z" fill="#1C1B1F"/>
+        </svg>          
+      </button>
+      <div class="modal-text">Обучение запущено, ждите</div>
+      <button class="modal-btn">Хорошо</button>
     </div>
   </body>
 </html>
