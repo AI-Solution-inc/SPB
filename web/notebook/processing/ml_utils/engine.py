@@ -2,7 +2,7 @@ import numpy as np
 import torch
 
 from tqdm import tqdm
-from metric_utils import eval_metric
+from .metric_utils import eval_metric
 
 
 class Engine:

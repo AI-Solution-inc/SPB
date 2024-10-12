@@ -166,4 +166,4 @@ cython_debug/
 
 *.ipynb
 web/notebook/processing/ml_utils/checkpoints/*/
-
+*.pth
