@@ -3,6 +3,7 @@ import cv2
 
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
+from PIL import Image
 import torch
 
 from model import get_model_deeplabv3_resnet50
@@ -38,9 +39,20 @@ labels = ["scratch", "pixels", "keyboard", "lock", "screw", "chip", "other"]
 
 
 def write_outputs2mask(outputs):
-    pass
+    mask_img = 7 * np.ones(shape=outputs.shape[:2])
+    for i in range(7):
+        masked_output = np.ma.masked_where(outputs[..., i] > 0.7, outputs[..., i])
+        print(i,np.sum(masked_output.mask))
+        mask_img[masked_output.mask] = i
+
+    pil_mask = Image.fromarray(mask_img).convert('RGB')
+    pil_mask.save("../../media/mask.png", "PNG")
+
 
 def run_on_image(image: np.ndarray):
+    image_orig = Image.fromarray(image).convert('RGB')
+    image_orig.save("../../media/original.png", "PNG")
+    
     img_t = preprocess_img(image)
     with torch.no_grad():
         outputs = MODEL(img_t)
@@ -51,6 +63,7 @@ def run_on_image(image: np.ndarray):
 
     outputs = outputs.cpu().numpy()[0]
     outputs = resize(outputs.transpose((1, 2, 0)), image.shape[:2])
+    write_outputs2mask(outputs)
 
     plt.imshow(image)
 
@@ -64,4 +77,4 @@ def run_on_image(image: np.ndarray):
 
     plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
     plt.axis("off")
-    plt.savefig("../myapp/media/processed.png", bbox_inches="tight")
+    plt.savefig("../../media/processed.png", bbox_inches="tight")
