@@ -7,15 +7,16 @@ from PIL import Image
 import numpy as np
 from notebook.settings import MEDIA_ROOT
 
-def processing() -> list:
-    return list()
-
 def starting_screen(request):
 
     data = []
+    mask = ''
 
     if request.method == 'POST' and request.FILES.get('photo'):
+
+        # print (request.POST.get('action'))
         photo = request.FILES['photo']
+        serial_num = '123-123'
         fs = FileSystemStorage()
         filename = fs.save(photo.name, photo) # имя файла
         # uploaded_file_url = fs.url(filename) # /media/...
@@ -29,13 +30,13 @@ def starting_screen(request):
 
         # Получение абсолютного пути к файлу
 
-        run_on_image(image_array)
-        img = os.path.join('media', 'processed.png')
-        print(img)
+        mask, process = run_on_image(serial_num,image_array)
+        # img = os.path.join('media', 'processed.png')
+        # print(process)
 
         context = {
-            'uploaded_file_url': img,
-            'data': data,
+            'uploaded_file_url': process,
+            'data': serial_num,
         }
         return render(request, 'starting_screen.html', context)
     

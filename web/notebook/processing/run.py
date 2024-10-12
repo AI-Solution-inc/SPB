@@ -51,8 +51,8 @@ def write_outputs2mask(serial_id, outputs):
 
 
 def run_on_image(serial_id, image: np.ndarray):
-    image_orig = Image.fromarray(image).convert('RGB')
-    image_orig.save(f"../notebook/media/original_{serial_id}.png", "PNG")
+    # image_orig = Image.fromarray(image).convert('RGB')
+    # image_orig.save(f"../notebook/media/original_{serial_id}.png", "PNG")
     
     img_t = preprocess_img(image)
     with torch.no_grad():
@@ -79,11 +79,12 @@ def run_on_image(serial_id, image: np.ndarray):
             patches += [mpatches.Patch(color=color, label=labels[i])]
             line2db += f" {i}"
 
-    with open("database.txt", 'wa') as f:
+    with open("processing/database.txt", 'a') as f:
         f.write(line2db)
+        f.write("\n")
 
     plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
     plt.axis("off")
     plt.savefig(f"../notebook/media/processed_{serial_id}.png", bbox_inches="tight")
     
-    return f"../notebook/media/mask_{serial_id}.png", f"../notebook/media/processed_{serial_id}.png"
+    return f"media/mask_{serial_id}.png", f"media/processed_{serial_id}.png"
