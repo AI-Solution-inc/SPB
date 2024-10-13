@@ -1,0 +1,10 @@
+Performing system checks...
+
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+October 13, 2024 - 10:50:26
+Django version 5.0.6, using settings 'notebook.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+

@@ -14,7 +14,9 @@ def draw_from_db():
         items = l.split(' ')
         for i in items[1:]:
             counter_dict[int(i)] += 1
-    
+            
+    fig, axes = plt.subplots(1, 1)
+
     plt.bar(labels, list(counter_dict.values()), width=0.5, color=['magenta', 'blue', 'green', 'orange', 'red', 'grey', 'brown'])
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
     plt.title("Statistics")
